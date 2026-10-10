@@ -83,7 +83,7 @@ else
   [ -z "$CT" ] && command -v docker >/dev/null 2>&1 && CT=docker
   if [ -n "$CT" ]; then
     echo "makensis not found — using $CT (debian:stable-slim + nsis)"
-    "$CT" run --rm -v "$ROOT:/w:Z" -w /w docker.io/library/debian:stable-slim sh -c \
+    "$CT" run --rm -e DEBIAN_FRONTEND=noninteractive -v "$ROOT:/w:Z" -w /w docker.io/library/debian:stable-slim sh -c \
       "apt-get update -qq >/dev/null && apt-get install -y -qq nsis >/dev/null && \
        makensis ${NSIS_ARGS[*]} -DSRCDIR=/w/release/$VER/build/win-x64 -DROOT=/w -DOUTFILE=/w/release/$VER/assets/$SETUP packaging/freemon.nsi"
   else
