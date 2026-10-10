@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- FreeMon icon (c) 2026 ITUASUPPORT, MIT License -->
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#18a06c"/>
+      <stop offset="1" stop-color="#0a583e"/>
+    </linearGradient>
+  </defs>
+  <rect x="40" y="40" width="944" height="944" rx="210" fill="url(#bg)"/>
+  <path d="M 347 808 A 330 330 0 1 1 677 808" fill="none" stroke="#fff" stroke-width="58" stroke-linecap="round"/>
+  <polyline points="242,542 392,542 452,352 532,712 597,462 632,542 782,542" fill="none" stroke="#fff"
+            stroke-width="50" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="512" cy="852" r="62" fill="#fff"/>
+  <circle cx="512" cy="852" r="36" fill="#2ecc71"/>
+</svg>

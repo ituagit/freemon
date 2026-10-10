@@ -1,0 +1,69 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>freemon</AssemblyName>
+    <RootNamespace>FreeMon</RootNamespace>
+    <Version>1.13.0</Version>
+    <Product>FreeMon</Product>
+    <Authors>ITUASUPPORT</Authors>
+    <Company>ITUASUPPORT</Company>
+    <Copyright>© 2026 ITUASUPPORT</Copyright>
+    <Description>FreeMon — моніторинг доступності мережевих пристроїв</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <ApplicationIcon>assets/freemon.ico</ApplicationIcon>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.1.3" />
+    <PackageReference Include="Avalonia.Desktop" Version="12.1.3" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.3" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.*" />
+    <PackageReference Include="PDFsharp-MigraDoc" Version="6.2.4" />
+    <PackageReference Include="MailKit" Version="4.17.0" />
+    <!-- Windows DPAPI for the installation key (MIT, part of .NET) -->
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="10.0.*" />
+  </ItemGroup>
+
+  <!-- Noto Sans for PDF reports (downloaded by setup_project.sh, SIL OFL 1.1) -->
+  <ItemGroup>
+    <EmbeddedResource Include="assets/fonts/NotoSans-Regular.ttf" LogicalName="NotoSans-Regular.ttf" />
+    <EmbeddedResource Include="assets/fonts/NotoSans-Bold.ttf" LogicalName="NotoSans-Bold.ttf" />
+    <!-- Full Material Design Icons set (@mdi/js 7.4.47, Apache 2.0), downloaded by setup_project.sh -->
+    <EmbeddedResource Include="assets/mdi/mdi.js" LogicalName="mdi.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="assets/freemon.png" LogicalName="freemon.png" />
+    <EmbeddedResource Include="assets/sounds/down.wav" LogicalName="sound-down.wav" />
+    <EmbeddedResource Include="assets/sounds/degraded.wav" LogicalName="sound-degraded.wav" />
+    <EmbeddedResource Include="assets/sounds/recovery.wav" LogicalName="sound-recovery.wav" />
+    <EmbeddedResource Include="lang/*.json" LogicalName="lang/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="LICENSE.txt" LogicalName="LICENSE.txt" />
+    <EmbeddedResource Include="THIRD_PARTY_NOTICES.txt" LogicalName="THIRD_PARTY_NOTICES.txt" />
+    <EmbeddedResource Include="README.md" LogicalName="README.md" />
+    <!-- "README.uk.md" looks like a culture-specific resource to MSBuild ("uk") and would go to a satellite
+         assembly; embed a copy with a neutral file name instead -->
+    <EmbeddedResource Include="obj/readme/README-uk.md" LogicalName="README.uk.md" />
+    <EmbeddedResource Include="docs/MANUAL.md" LogicalName="MANUAL.md" />
+    <EmbeddedResource Include="obj/readme/MANUAL-uk.md" LogicalName="MANUAL.uk.md" />
+    <None Include="LICENSE.txt" CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <None Include="THIRD_PARTY_NOTICES.txt" CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <None Include="README.md" CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <None Include="README.uk.md" CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+  </ItemGroup>
+
+  <!-- Native .pdb files shipped inside NuGet packages are not needed in dist -->
+  <Target Name="FreeMonStripPdb" AfterTargets="ComputeResolvedFilesToPublishList">
+    <ItemGroup>
+      <ResolvedFileToPublish Remove="@(ResolvedFileToPublish)" Condition="'%(Extension)' == '.pdb'" />
+    </ItemGroup>
+  </Target>
+  <Target Name="CopyUkrainianReadme" BeforeTargets="PrepareForBuild;BeforeBuild">
+    <Copy SourceFiles="README.uk.md;docs/MANUAL.uk.md" DestinationFiles="obj/readme/README-uk.md;obj/readme/MANUAL-uk.md" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

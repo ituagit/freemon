@@ -1,0 +1,8 @@
+name;address;type;parent_address;group;description;enabled;interval_s;packet_count;packet_interval_ms;timeout_ms;packet_size;down_loss_pct;deg_loss_pct;deg_avg_ms;deg_max_ms;deg_jitter_ms;confirm_cycles
+Localhost;127.0.0.1;Сервер;;Тест;Цей комп'ютер (корінь для демо);1;5;;;;;;;;;;
+Cloudflare DNS;1.1.1.1;Сервер;127.0.0.1;Тест;Публічний DNS;1;;;;;;;;;;;
+Google DNS;8.8.8.8;Сервер;127.0.0.1;Тест;Публічний DNS;1;;;;;;;;;;;
+Тест недоступний;192.0.2.1;Інше;127.0.0.1;Тест;TEST-NET-1, завжди «Немає зв'язку»;1;;;;;;;;;;;
+Cloudflare DNS 2;1.0.0.1;Сервер;1.1.1.1;Тест;Вкладена родина (пунктир на мапі);1;;;;;;;;;;;
+Google DNS 2;8.8.4.4;Сервер;8.8.8.8;Тест;Вкладена родина (пунктир на мапі);1;;;;;;;;;;;
+Quad9 DNS;9.9.9.9;Телефон;;Тест;Без батька — картка «Окремі пристрої»;1;;;;;;;;;;;

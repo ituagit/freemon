@@ -1,0 +1,55 @@
+# nFPM configuration (filled in by release.sh): one file -> .deb and .rpm
+name: freemon
+arch: amd64
+platform: linux
+version: "@VERSION@"
+release: 1
+section: net
+priority: optional
+maintainer: "ITUASUPPORT"
+vendor: "ITUASUPPORT"
+homepage: "@HOMEPAGE@"
+license: MIT
+description: |
+  FreeMon — network device availability monitoring: ping and TCP / HTTP(S) / DNS checks,
+  a map of device families, history and PDF reports, notifications to e-mail and messengers.
+contents:
+  - src: "@BUILD@/"
+    dst: /opt/freemon/
+    type: tree
+  - src: /opt/freemon/freemon
+    dst: /usr/bin/freemon
+    type: symlink
+  - src: "@ROOT@/packaging/freemon.desktop"
+    dst: /usr/share/applications/freemon.desktop
+  - src: "@ROOT@/assets/freemon.png"
+    dst: /usr/share/icons/hicolor/256x256/apps/freemon.png
+  - src: "@ROOT@/packaging/freemon.svg"
+    dst: /usr/share/icons/hicolor/scalable/apps/freemon.svg
+  - src: "@ROOT@/LICENSE.txt"
+    dst: /usr/share/doc/freemon/LICENSE.txt
+  - src: "@ROOT@/THIRD_PARTY_NOTICES.txt"
+    dst: /usr/share/doc/freemon/THIRD_PARTY_NOTICES.txt
+  - src: "@ROOT@/README.md"
+    dst: /usr/share/doc/freemon/README.md
+  - src: "@ROOT@/README.uk.md"
+    dst: /usr/share/doc/freemon/README.uk.md
+  - src: "@ROOT@/docs/MANUAL.md"
+    dst: /usr/share/doc/freemon/MANUAL.md
+  - src: "@ROOT@/docs/MANUAL.uk.md"
+    dst: /usr/share/doc/freemon/MANUAL.uk.md
+overrides:
+  deb:
+    depends:
+      - libc6
+      - libfontconfig1
+      - libx11-6
+      - libice6
+      - libsm6
+  rpm:
+    # library capabilities: the same names work on RHEL-compatible and SUSE distributions
+    depends:
+      - "libX11.so.6()(64bit)"
+      - "libICE.so.6()(64bit)"
+      - "libSM.so.6()(64bit)"
+      - "libfontconfig.so.1()(64bit)"

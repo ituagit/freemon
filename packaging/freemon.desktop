@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=FreeMon
+GenericName=Network availability monitor
+GenericName[uk]=Моніторинг доступності мережі
+Comment=Network device availability monitoring
+Comment[uk]=Моніторинг доступності мережевих пристроїв
+Exec=freemon
+Icon=freemon
+Terminal=false
+Categories=Network;Monitor;System;
+Keywords=ping;monitoring;network;
+StartupWMClass=freemon
